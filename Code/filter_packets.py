@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 import sys
+
+
 def filter():
 	# Filter the raw text file (Node*.txt) so that only ICMP Echo Requests and Replies show
 	print("Filtering Packets...")
 	for i in [1, 2, 3, 4]:
-		print("Filtering File " + str(i) + "...")
+		print("		Filtering File " + str(i) + "...")
 		# Open The files
 		file = open(sys.path[0]+"/../Captures/Node" + str(i) + ".txt", "r")
 		loop = True
