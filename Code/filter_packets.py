@@ -1,8 +1,25 @@
 #!/usr/bin/python3
 import sys
+import os.path
+
+
+def delete_existing_files():
+	# Check if files already exist
+	if os.path.exists(sys.path[0] + "/../Captures/Node1_filtered.txt") is True:
+		os.remove(sys.path[0] + "/../Captures/Node1_filtered.txt")
+	if os.path.exists(sys.path[0] + "/../Captures/Node2_filtered.txt") is True:
+		os.remove(sys.path[0] + "/../Captures/Node2_filtered.txt")
+	if os.path.exists(sys.path[0] + "/../Captures/Node3_filtered.txt") is True:
+		os.remove(sys.path[0] + "/../Captures/Node3_filtered.txt")
+	if os.path.exists(sys.path[0] + "/../Captures/Node4_filtered.txt") is True:
+		os.remove(sys.path[0] + "/../Captures/Node4_filtered.txt")
 
 
 def filter():
+
+	# Delete existing filtered files
+	delete_existing_files()
+
 	# Filter the raw text file (Node*.txt) so that only ICMP Echo Requests and Replies show
 	print("Filtering Packets...")
 	for i in [1, 2, 3, 4]:
