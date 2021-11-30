@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def filter():
 	# Filter the raw text file (Node*.txt) so that only ICMP Echo Requests and Replies show
 	print("Filtering Packets...")
