@@ -4,6 +4,14 @@ from packet_analyzer import *
 
 def compute(lst1, lst2, lst3, lst4):
     for x in [lst1, lst2, lst3, lst4]:
+        if x == lst1:
+            ip = '192.168.100.1'
+        elif x == lst2:
+            ip = '192.168.100.2'
+        elif x == lst3:
+            ip = '192.168.200.1'
+        else:
+            ip = '192.168.200.2'
         req_sent = 0
         req_rec = 0
         reply_rec = 0
