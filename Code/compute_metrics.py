@@ -61,3 +61,68 @@ def compute(lst1, lst2, lst3, lst4):
         print("Echo Request Data Sent ", req_da_sent)
         print("Echo Request Data Received ", req_da_rec, "\n\n")
         node_num = node_num + 1
+        
+# Function for Request Data Sent
+def request_data_sent(node,ip):
+    sum=0
+    for k in node:
+        if k[2]==ip and k[8]=="request":
+            sum+=int(k[5])-2
+    return sum
+
+# Function for Request Bytes Sent
+def request_bytes_sent(node,ip):
+    sum=0
+    for k in node:
+        if k[2] == ip and k[8] == "request":
+            sum+=int(k[5])
+    return sum
+
+# Function for average RTT(ms)
+def average_RTT(node, ip):
+    sum=0
+    count=0
+    for i in range(0, len(node), 2):
+        if node[i][2]==ip and node[i][8]=="request":
+            sum+=float(node[i+1][1])-float(node[i][1])
+            count+=1
+    return (sum/count)*1000
+
+# Function for Echo Request Throughput(kB/sec)
+def echo_request_throughput(node, ip):
+    sum=0
+    for i in range(0, len(node), 2):
+        if node[i][2]==ip and node[i][8]=="request":
+            sum+=(float(node[i+1][1])-float(node[i][1]))
+    return ((request_bytes_sent(node, ip)/sum)/1000)
+
+# Function for Echo Request Goodput(kB/sec)
+def echo_request_goodput(node, ip):
+    sum=0
+    for i in range(0, len(node), 2):
+        if node[i][2] == ip and node[i][8] == "request":
+            sum+=(float(node[i+1][1])-float(node[i][1]))
+    return (request_data_sent(node, ip)/sum)/1000
+
+# Function for Average Reply Delay(us)
+def average_reply_delay(node, ip):
+    sum=0
+    temp=0
+    for i in range(0, len(node), 2):
+        if node[i][3]==ip and node[i][8]=="request":
+            sum+=(float(node[i+1][1])-float(node[i][1]))
+            temp+=1
+    return (sum/temp)*1000000
+
+# Function for Average Echo Request Hop Count
+def average_hop_count(node, ip):
+    temp=129
+    sum=0
+    count=0
+    for i in range(0, len(node)):
+        if node[i][8]=="reply" and node[i][3]==ip:
+            sum+=(temp-(int("".join(filter(str.isdigit, node[i][11])))))
+        if node[i][8]=="request" and node[i][2]==ip:
+            count+=1
+    return float(sum)/float(count)
+
